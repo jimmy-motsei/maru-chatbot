@@ -171,10 +171,11 @@ export default function ChatWidget() {
             animate={{ scale: 1 }}
             exit={{ scale: 0 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-[var(--maru-cyan)] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all animate-glow"
+            className="fixed bottom-6 z-50 w-32 h-32 bg-[var(--maru-cyan)] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all animate-pulsating-border"
+            style={{ right: 'calc(1.5rem - 10px)' }}
             aria-label="Open chat"
           >
-            <MessageCircle size={28} className="text-[var(--maru-dark)]" />
+            <MessageCircle size={56} className="text-[var(--maru-dark)]" />
           </motion.button>
         )}
       </AnimatePresence>
