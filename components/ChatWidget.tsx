@@ -163,19 +163,46 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Chat Button */}
+      {/* Chat Button - Modern Pill Style */}
       <AnimatePresence>
         {!isOpen && (
           <motion.button
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="fixed bottom-6 z-50 w-32 h-32 bg-[var(--maru-cyan)] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all animate-pulsating-border"
-            style={{ right: 'calc(1.5rem - 10px)' }}
+            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-[var(--maru-cyan)] to-[#0099FF] rounded-full shadow-[0_8px_24px_rgba(0,217,255,0.3),0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_32px_rgba(0,217,255,0.4),0_8px_16px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 animate-pulse-glow"
             aria-label="Open chat"
+            style={{ position: 'relative' }}
           >
-            <MessageCircle size={56} className="text-[var(--maru-dark)]" />
+            {/* Chat Icon SVG */}
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="flex-shrink-0"
+            >
+              <path
+                d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
+                fill="white"
+              />
+              {/* Three dots inside chat bubble */}
+              <circle cx="8" cy="10" r="1.5" fill="#00D9FF" />
+              <circle cx="12" cy="10" r="1.5" fill="#00D9FF" />
+              <circle cx="16" cy="10" r="1.5" fill="#00D9FF" />
+            </svg>
+
+            {/* "Chat" Text */}
+            <span className="text-white font-semibold text-base tracking-wide select-none">
+              Chat
+            </span>
+
+            {/* Notification Badge */}
+            <span className="absolute -top-2 -right-2 flex items-center justify-center min-w-[20px] h-5 px-1.5 bg-red-500 border-2 border-white rounded-full text-white text-xs font-bold">
+              1
+            </span>
           </motion.button>
         )}
       </AnimatePresence>
