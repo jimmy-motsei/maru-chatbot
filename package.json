@@ -1,20 +1,47 @@
 {
   "name": "maru-chatbot",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./api-handlers": {
+      "types": "./dist/api-handlers.d.ts",
+      "import": "./dist/api-handlers.mjs",
+      "require": "./dist/api-handlers.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:clean": "rm -rf dist",
+    "build:lib": "npm run build:clean && tsup && npm run build:types",
+    "build:types": "tsc --project tsconfig.build.json --emitDeclarationOnly",
+    "build:check": "npm run build:lib && node -e \"console.log('Build check passed')\"",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "package": "npm run build:check",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "peerDependencies": {
+    "framer-motion": ">=11.0.0",
+    "lucide-react": ">=0.400.0",
+    "next": ">=14.0.0",
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
-    "framer-motion": "^12.23.26",
-    "lucide-react": "^0.556.0",
-    "next": "16.0.8",
-    "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "@google/generative-ai": "^0.24.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -23,7 +50,13 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.8",
+    "framer-motion": "^12.23.26",
+    "lucide-react": "^0.556.0",
+    "next": "^16.1.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "tailwindcss": "^4",
+    "tsup": "^8.5.1",
     "typescript": "^5"
   }
 }

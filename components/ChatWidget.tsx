@@ -6,6 +6,7 @@ import { MessageCircle, X, Send, Minimize2 } from 'lucide-react';
 import ChatMessage, { TypingIndicator } from './ChatMessage';
 import LeadCaptureForm from './LeadCaptureForm';
 import { Message, LeadData } from '@/lib/types';
+import { COLORS } from '@/lib/constants';
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -171,9 +172,13 @@ export default function ChatWidget() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 bg-gradient-to-r from-[var(--maru-cyan)] to-[#0099FF] rounded-full shadow-[0_8px_24px_rgba(0,217,255,0.3),0_4px_8px_rgba(0,0,0,0.1)] hover:shadow-[0_12px_32px_rgba(0,217,255,0.4),0_8px_16px_rgba(0,0,0,0.15)] hover:-translate-y-1 transition-all duration-300 animate-pulse-glow"
+            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-full hover:-translate-y-1 transition-all duration-300 animate-pulse-glow"
+            style={{
+              position: 'relative',
+              background: `linear-gradient(to right, ${COLORS.accent}, #0099FF)`,
+              boxShadow: '0 8px 24px rgba(0,217,255,0.3), 0 4px 8px rgba(0,0,0,0.1)'
+            }}
             aria-label="Open chat"
-            style={{ position: 'relative' }}
           >
             {/* Chat Icon SVG */}
             <svg
@@ -217,10 +222,16 @@ export default function ChatWidget() {
             className="fixed bottom-6 right-6 z-50 w-[400px] max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-3rem)] glass rounded-2xl shadow-2xl flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[var(--maru-dark)] to-[var(--maru-dark-secondary)] px-6 py-4 flex items-center justify-between border-b border-[var(--maru-cyan)]/30">
+            <div 
+              className="px-6 py-4 flex items-center justify-between border-b"
+              style={{
+                background: `linear-gradient(to right, ${COLORS.maruDark}, ${COLORS.maruDarkSecondary})`,
+                borderBottomColor: `${COLORS.accent}30`
+              }}
+            >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[var(--maru-cyan)] rounded-full flex items-center justify-center">
-                  <MessageCircle size={22} className="text-[var(--maru-dark)]" />
+                <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: COLORS.accent }}>
+                  <MessageCircle size={22} style={{ color: COLORS.maruDark }} />
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Maru AI Assistant</h3>
@@ -277,12 +288,25 @@ export default function ChatWidget() {
                       onChange={(e) => setInputValue(e.target.value)}
                       placeholder="Type your message..."
                       disabled={isLoading}
-                      className="flex-1 px-4 py-2 bg-[var(--maru-dark)] border border-gray-700 rounded-lg focus:border-[var(--maru-cyan)] focus:outline-none text-white placeholder-gray-500 disabled:opacity-50 transition-colors"
+                      className="flex-1 px-4 py-2 rounded-lg focus:outline-none disabled:opacity-50 transition-colors"
+                      style={{
+                        backgroundColor: COLORS.maruDark,
+                        border: '1px solid #374151',
+                        color: COLORS.text
+                      }}
+                      onFocus={(e) => e.currentTarget.style.borderColor = COLORS.accent}
+                      onBlur={(e) => e.currentTarget.style.borderColor = '#374151'}
                     />
                     <button
                       type="submit"
                       disabled={!inputValue.trim() || isLoading}
-                      className="px-4 py-2 bg-[var(--maru-cyan)] text-[var(--maru-dark)] rounded-lg hover:bg-[var(--maru-cyan)]/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold"
+                      className="px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold"
+                      style={{
+                        backgroundColor: COLORS.accent,
+                        color: COLORS.maruDark
+                      }}
+                      onMouseEnter={(e) => !isLoading && (e.currentTarget.style.backgroundColor = COLORS.accentHover)}
+                      onMouseLeave={(e) => !isLoading && (e.currentTarget.style.backgroundColor = COLORS.accent)}
                       aria-label="Send message"
                     >
                       <Send size={18} />
