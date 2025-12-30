@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Minimize2 } from 'lucide-react';
+import { X, Send, Minimize2 } from 'lucide-react';
 import ChatMessage, { TypingIndicator } from './ChatMessage';
 import LeadCaptureForm from './LeadCaptureForm';
 import { Message, LeadData } from '@/lib/types';
@@ -17,13 +17,21 @@ export default function ChatWidget() {
   const [showLeadForm, setShowLeadForm] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
+  // Conversation starters
+  const conversationStarters = [
+    { icon: '🚀', text: 'Learn about our services', query: 'What services does Maru Online offer?' },
+    { icon: '💰', text: 'View pricing plans', query: 'How much does the Growth plan cost?' },
+    { icon: '🛠️', text: 'Explore free tools', query: 'What free tools do you have?' },
+    { icon: '📞', text: 'Book a consultation', query: 'How can I schedule a consultation?' },
+  ];
+
   // Initial greeting message
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       const greeting: Message = {
         id: '1',
         role: 'assistant',
-        content: "Hi! I'm the Maru AI Assistant. How can I help you grow your business today? 🚀",
+        content: "👋 Hi! I'm Maru AI, your intelligent assistant for AI & automation solutions.\n\nI'm here to help you discover how we can transform your business with cutting-edge technology.\n\nAsk me a question or select an option below:",
         timestamp: new Date(),
       };
       setMessages([greeting]);
@@ -172,35 +180,25 @@ export default function ChatWidget() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-full hover:-translate-y-1 transition-all duration-300 animate-pulse-glow"
+            className="group fixed bottom-6 right-6 z-50 flex items-center gap-3 px-5 py-3 rounded-full hover:-translate-y-1 transition-all duration-300 shadow-lg hover:shadow-xl"
             style={{
               position: 'relative',
-              background: `linear-gradient(to right, ${COLORS.accent}, #0099FF)`,
-              boxShadow: '0 8px 24px rgba(0,217,255,0.3), 0 4px 8px rgba(0,0,0,0.1)'
+              backgroundColor: COLORS.accent,
+              boxShadow: '0 8px 24px rgba(61,214,208,0.4), 0 4px 8px rgba(0,0,0,0.1)'
             }}
             aria-label="Open chat"
           >
-            {/* Chat Icon SVG */}
-            <svg
-              width="24"
+            {/* Maru Favicon */}
+            <img 
+              src="/favicon.ico" 
+              alt="Maru" 
+              width="24" 
               height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
               className="flex-shrink-0"
-            >
-              <path
-                d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2Z"
-                fill="white"
-              />
-              {/* Three dots inside chat bubble */}
-              <circle cx="8" cy="10" r="1.5" fill="#00D9FF" />
-              <circle cx="12" cy="10" r="1.5" fill="#00D9FF" />
-              <circle cx="16" cy="10" r="1.5" fill="#00D9FF" />
-            </svg>
+            />
 
-            {/* "Chat" Text */}
-            <span className="text-white font-semibold text-base tracking-wide select-none">
+            {/* "Chat" Text - Dark color for contrast */}
+            <span className="font-semibold text-base tracking-wide select-none" style={{ color: COLORS.maruDark }}>
               Chat
             </span>
 
@@ -231,7 +229,12 @@ export default function ChatWidget() {
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: COLORS.accent }}>
-                  <MessageCircle size={22} style={{ color: COLORS.maruDark }} />
+                  <img 
+                    src="/favicon.ico" 
+                    alt="Maru" 
+                    width="22" 
+                    height="22"
+                  />
                 </div>
                 <div>
                   <h3 className="font-semibold text-white">Maru AI Assistant</h3>
@@ -263,6 +266,32 @@ export default function ChatWidget() {
                   {messages.map((message) => (
                     <ChatMessage key={message.id} message={message} />
                   ))}
+                  
+                  {/* Conversation Starters - Show only on first message */}
+                  {messages.length === 1 && !isLoading && (
+                    <div className="flex flex-col gap-2 mt-4">
+                      {conversationStarters.map((starter, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setInputValue(starter.query);
+                            setTimeout(() => handleSendMessage(), 100);
+                          }}
+                          className="flex items-center gap-3 px-4 py-3 rounded-lg border transition-all hover:scale-[1.02] text-left"
+                          style={{
+                            backgroundColor: COLORS.maruDarkSecondary,
+                            borderColor: `${COLORS.accent}40`,
+                            color: COLORS.text
+                          }}
+                          onMouseEnter={(e) => e.currentTarget.style.borderColor = COLORS.accent}
+                          onMouseLeave={(e) => e.currentTarget.style.borderColor = `${COLORS.accent}40`}
+                        >
+                          <span className="text-xl">{starter.icon}</span>
+                          <span className="text-sm font-medium">{starter.text}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                   
                   {isLoading && <TypingIndicator />}
 

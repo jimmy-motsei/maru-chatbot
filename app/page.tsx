@@ -9,7 +9,7 @@ export default function Home() {
       <div className="max-w-4xl mx-auto text-center mb-12">
         <h1 className="text-5xl md:text-6xl font-bold mb-6">
           <span className="text-white">Maru AI </span>
-          <span className="text-[var(--maru-cyan)]">Chatbot</span>
+          <span className="text-[var(--maru-turquoise)]">Chatbot</span>
         </h1>
         <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
           Your intelligent assistant for AI & automation solutions. Get instant answers about our services,
@@ -20,7 +20,7 @@ export default function Home() {
             href="https://maruonline.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-8 py-3 bg-[var(--maru-cyan)] text-[var(--maru-dark)] rounded-lg font-semibold hover:bg-[var(--maru-cyan)]/90 transition-all"
+            className="px-8 py-3 bg-[var(--maru-turquoise)] text-[var(--maru-dark)] rounded-lg font-semibold hover:bg-[var(--maru-turquoise)]/90 transition-all"
           >
             Visit Maru Online
           </a>
@@ -29,7 +29,7 @@ export default function Home() {
               const chatButton = document.querySelector('[aria-label="Open chat"]') as HTMLButtonElement;
               chatButton?.click();
             }}
-            className="px-8 py-3 border-2 border-[var(--maru-cyan)] text-[var(--maru-cyan)] rounded-lg font-semibold hover:bg-[var(--maru-cyan)]/10 transition-all"
+            className="px-8 py-3 border-2 border-[var(--maru-turquoise)] text-[var(--maru-turquoise)] rounded-lg font-semibold hover:bg-[var(--maru-turquoise)]/10 transition-all"
           >
             Try the Chatbot
           </button>
@@ -39,7 +39,7 @@ export default function Home() {
       {/* Features */}
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 mb-16">
         <div className="glass p-6 rounded-xl">
-          <div className="w-12 h-12 bg-[var(--maru-cyan)]/20 rounded-lg flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[var(--maru-turquoise)]/20 rounded-lg flex items-center justify-center mb-4">
             <span className="text-2xl">🤖</span>
           </div>
           <h3 className="text-xl font-semibold text-white mb-2">AI-Powered</h3>
@@ -49,7 +49,7 @@ export default function Home() {
         </div>
 
         <div className="glass p-6 rounded-xl">
-          <div className="w-12 h-12 bg-[var(--maru-cyan)]/20 rounded-lg flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[var(--maru-turquoise)]/20 rounded-lg flex items-center justify-center mb-4">
             <span className="text-2xl">📊</span>
           </div>
           <h3 className="text-xl font-semibold text-white mb-2">Lead Qualification</h3>
@@ -59,7 +59,7 @@ export default function Home() {
         </div>
 
         <div className="glass p-6 rounded-xl">
-          <div className="w-12 h-12 bg-[var(--maru-cyan)]/20 rounded-lg flex items-center justify-center mb-4">
+          <div className="w-12 h-12 bg-[var(--maru-turquoise)]/20 rounded-lg flex items-center justify-center mb-4">
             <span className="text-2xl">⚡</span>
           </div>
           <h3 className="text-xl font-semibold text-white mb-2">Instant Responses</h3>
@@ -77,7 +77,7 @@ export default function Home() {
           Just add a simple script tag or React component.
         </p>
         <div className="bg-[var(--maru-dark)] p-4 rounded-lg text-left overflow-x-auto">
-          <code className="text-sm text-[var(--maru-cyan)]">
+          <code className="text-sm text-[var(--maru-turquoise)]">
             {`<ChatWidget />`}
           </code>
         </div>
@@ -94,7 +94,7 @@ export default function Home() {
             href="https://maruonline.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[var(--maru-cyan)] hover:underline"
+            className="text-[var(--maru-turquoise)] hover:underline"
           >
             Maru Online
           </a>{' '}
