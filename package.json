@@ -4,15 +4,15 @@
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/src/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
     "./api-handlers": {
-      "types": "./dist/api-handlers.d.ts",
+      "types": "./dist/lib/api-handlers.d.ts",
       "import": "./dist/api-handlers.mjs",
       "require": "./dist/api-handlers.js"
     }
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "@langchain/openai": "^1.2.0",
+    "@langchain/google-genai": "^2.1.3",
     "@langchain/pinecone": "^1.0.1",
     "@pinecone-database/pinecone": "^5.1.2",
     "dotenv": "^17.2.3",

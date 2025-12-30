@@ -71,7 +71,13 @@ export async function POST(request) {
 ```bash
 # .env.local
 GEMINI_API_KEY=your_key_here  # Optional - works in demo mode without it
+
+# For RAG/Knowledge Base (optional)
+PINECONE_API_KEY=your_pinecone_key
+PINECONE_INDEX=your_index_name
 ```
+
+**Note:** The chatbot uses Google's Gemini AI. Get your API key from: https://makersuite.google.com/app/apikey
 
 ## 📚 Documentation
 

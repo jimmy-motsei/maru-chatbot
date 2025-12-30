@@ -35,8 +35,26 @@ export async function handleChatRequest(messages: Array<{ role: 'user' | 'assist
     response = getDemoResponse(lastMessage.content);
     console.log('⚠️  Running in DEMO mode - GEMINI_API_KEY not set');
   } else {
-    // Generate response using Gemini AI
-    response = await generateResponse(messages, SYSTEM_PROMPT);
+    // Production mode
+    // Try RAG first (Knowledge Base)
+    try {
+      const { queryRAG } = await import('./rag-pipeline');
+      const lastMessage = messages[messages.length - 1];
+      
+      // Attempt RAG query
+      const ragResponse = await queryRAG(lastMessage.content);
+
+      if (ragResponse) {
+        response = ragResponse;
+      } else {
+        // Fallback: Generate response using Gemini AI
+        response = await generateResponse(messages, SYSTEM_PROMPT);
+      }
+    } catch (e) {
+      console.error('Error in chat handler:', e);
+      // Fallback if import fails or RAG fails completely
+      response = await generateResponse(messages, SYSTEM_PROMPT);
+    }
   }
 
   return { response, success: true };

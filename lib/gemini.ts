@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai';
 
 // Only initialize if API key is present
 let genAI: GoogleGenerativeAI | null = null;
-let model: any = null;
+let model: ReturnType<GoogleGenerativeAI['getGenerativeModel']> | null = null;
 
 if (process.env.GEMINI_API_KEY) {
   genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
