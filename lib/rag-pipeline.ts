@@ -35,7 +35,7 @@ export async function queryRAG(userQuestion: string): Promise<string> {
     // Use Gemini for embeddings instead of OpenAI
     const embeddings = new GoogleGenerativeAIEmbeddings({
       apiKey: process.env.GEMINI_API_KEY,
-      modelName: 'embedding-001', // Gemini's embedding model
+      modelName: 'models/text-embedding-004', // Gemini's embedding model
     });
 
     // Create vector store
